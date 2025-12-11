@@ -55,6 +55,47 @@
 
 **Durée totale estimée : 16-20 semaines (~4 à 5 mois, buffer inclus)**
 
+# Estimation annuelle des gains de temps avec SAPS
+
+## Hypothèse de base
+- Temps sans SAPS : ~14 h/mois par site.
+- Temps avec SAPS : ~4,5 h/mois par site.
+- Gain moyen : ≈ 65–70 %.
+
+---
+
+## Calcul annuel (par site)
+
+- **Sans SAPS** : 14 h × 12 mois = **168 h/an**.
+- **Avec SAPS** : 4,5 h × 12 mois = **54 h/an**.
+- **Temps gagné** : 168 – 54 = **114 h/an**.
+- **Pourcentage de gain** : (114 ÷ 168) ≈ **68 %**.
+
+---
+
+## Estimation annuelle des gains de temps avec SAPS
+
+| Nombre de sites | Temps sans SAPS (h/an) | Temps avec SAPS (h/an) | Temps gagné (h/an) | % Gain |
+|-----------------|-------------------------|-------------------------|--------------------|--------|
+| 1 site          | 168                     | 54                      | 114                | 68 %   |
+| 5 sites         | 840                     | 270                     | 570                | 68 %   |
+| 10 sites        | 1680                    | 540                     | 1140               | 68 %   |
+| 15 sites        | 2520                    | 810                     | 1710               | 68 %   |
+| 20 sites        | 3360                    | 1080                    | 2280               | 68 %   |
+| 25 sites        | 4200                    | 1350                    | 2850               | 68 %   |
+
+---
+
+## Synthèse
+- **Par site** : ≈ 114 h économisées par an.
+- **Organisation multi‑sites** : les gains se multiplient proportionnellement.
+- **Impact stratégique** : réduction significative de la charge manuelle, meilleure conformité et adoption facilitée.
+
+---
+
+## Notes
+- Les chiffres sont indicatifs et doivent être ajustés selon la taille réelle des sites et la fréquence des corrections.
+- Les gains sont maximisés si les rapports SAPS sont utilisés régulièrement et les Owners corrigent rapidement.
 ---
 
 # Étapes détaillées
