@@ -634,20 +634,16 @@ Power BI
 | Technique        | Scalabilité (trop de liens/sites)              | Élevée      | Élevé  | Segmenter les scans, définir seuils, optimiser requêtes                  |
 | Technique        | Performance Power BI lente                     | Moyenne     | Moyen  | Agrégations, Power Query, filtres par site/période                       |
 | Technique        | Rollback incomplet (données externes)          | Faible      | Élevé  | Export parallèle des données, tests réguliers de restauration            |
-
 | Organisationnel  | Adoption faible par les Owners                 | Élevée      | Élevé  | Formation courte, guide simple, mise en avant des bénéfices              |
 | Organisationnel  | Surcharge des gestionnaires (trop d’escalades) | Moyenne     | Élevé  | Regrouper escalades, seuil critique, tableau de bord central             |
 | Organisationnel  | Manque de discipline documentaire              |  Moyenne    | Élevé  | SLA clairs, escalades automatiques, intégration dans gouvernance         |
 | Organisationnel  | Conflits de gouvernance                        | Faible      | Élevé  | Comité SAPS, rôles documentés, processus d’arbitrage                     |
-
 | Humain           | Résistance au changement                       | Moyenne     | Moyen  | Positionner SAPS comme aide, valoriser corrections réussies              |
 | Humain           | Manque de formation                            | Moyenne     | Élevé  | Tutoriels vidéo courts, FAQ, infobulles Power BI                         |
 | Humain           | Fatigue des notifications                      | Élevée      | Moyen  | Consolidation hebdomadaire, seuils anti-spam, Teams centralisé           |
-
 | Sécurité         | Permissions trop larges non corrigées          | Moyenne     | Élevé  | Escalades automatiques, suivi Power BI, audits trimestriels              |
 | Sécurité         | Export sensible (PDF/Excel)                    | Moyenne     | Élevé  | Restreindre exports, filigrane “Confidentiel”, stockage sécurisé         |
 | Sécurité         | Archivage long terme non conforme              | Faible      | Élevé  | Politique de conservation, conformité RGPD/Loi 25, purge validée         |
-
 | Pilotage         | Sous-estimation du temps de maintenance        | Moyenne     | Élevé  | Allouer 10–15 % du temps, points mensuels, registre des ajustements      |
 | Pilotage         | Manque de sponsor exécutif                     | Moyenne     | Élevé  | Appui officiel, présenter SAPS comme outil de conformité                 |
 | Pilotage         | Dépendance à une seule personne                | Élevée      | Élevé  | Former un backup, documentation exhaustive, partage des responsabilités  |
@@ -2438,7 +2434,7 @@ Diminuer le risque systémique lié aux accès et aux secrets détenus par une s
 
 ## Légende RACI
 - **R (Responsible)** : réalise l’action.
-- **A (Accountable)** : responsable final, valide le résultat.
+- **A (Accountable)** : responsable final, valide le résultat. 
 - **C (Consulted)** : consulté pour avis ou expertise.
 - **I (Informed)** : informé du résultat ou de la décision.
 
