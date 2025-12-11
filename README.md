@@ -503,80 +503,90 @@ Encadrer l’archivage et la restauration du système SAPS (flux, tables, rappor
 
 # Architecture globale du projet
 
-SitesCatalog.xlsx
-        |
-        v
-Flux d’automatisation
-        |
-        |-- Extraction des liens (Pages, Docs, Listes)
-        |
-        |-- Validation des liens (OK / Error / Timeout)
-        |        v
-        |   BrokenLinkScan (données actives)
-        |
-        |-- Communication automatique
-        |        |-- Notifications standard (Owners)
-        |        |-- Escalades automatiques (Gestionnaires)
-        |        |-- Rapports consolidés (Mensuel)
-        |
-        |-- Archivage des données anciennes (> 12 mois)
-        |        v
-        |   BrokenLinkArchive (données archivées)
-        |
-        |-- Archivage du système SAPS et rollbacks
-        |        v
-        |   RollbackLog (versions, sauvegardes, restaurations)
-        |
-        |-- Détection des doublons (Excel, Word, PowerPoint, PDF)
-        |        v
-        |   DuplicateFiles (liste des fichiers en doublon)
-        |
-        |-- Gouvernance et suivi
-        |        |
-        |        |-- PermissionAudit (permissions trop larges)
-        |        |-- Historique des corrections (CorrectionDate, CorrectionAction)
-        |        |-- SLAStatus (Respecté / Dépassé)
-        |        |-- Export mensuel (PDF/Excel)
-        |        |-- Liens critiques (CriticalLink)
-        |        |-- Catégorisation des erreurs (404, 403, Timeout, etc.)
-        |
-        `-- Notifications (Outlook / Teams)
-                 `-- Owners et gestionnaires
+# Flux d’automatisation SAPS
 
+- SitesCatalog.xlsx
+  - Flux d’automatisation
+    - Extraction des liens
+      - Pages
+      - Docs
+      - Listes
+    - Validation des liens
+      - OK / Error / Timeout
+      - BrokenLinkScan (données actives)
+    - Communication automatique
+      - Notifications standard (Owners)
+      - Escalades automatiques (Gestionnaires)
+      - Rapports consolidés (Mensuel)
+    - Archivage des données anciennes (> 12 mois)
+      - BrokenLinkArchive (données archivées)
+    - Archivage du système SAPS et rollbacks
+      - RollbackLog (versions, sauvegardes, restaurations)
+    - Détection des doublons
+      - Excel
+      - Word
+      - PowerPoint
+      - PDF
+      - DuplicateFiles (liste des fichiers en doublon)
+    - Gouvernance et suivi
+      - PermissionAudit (permissions trop larges)
+      - Historique des corrections (CorrectionDate, CorrectionAction)
+      - SLAStatus (Respecté / Dépassé)
+      - Export mensuel (PDF/Excel)
+      - Liens critiques (CriticalLink)
+      - Catégorisation des erreurs (404, 403, Timeout, etc.)
+    - Notifications (Outlook / Teams)
+      - Owners et gestionnaires
 
-Power BI
-        |
-        |-- Vue Active (BrokenLinkScan)
-        |-- Vue Communication (Notifications, Escalades, Rapports)
-        |-- Vue Archive (BrokenLinkArchive)
-        |-- Vue Rollbacks (RollbackLog)
-        |-- Vue Doublons (DuplicateFiles)
-        |-- Vue Gouvernance (PermissionAudit, SLA, Corrections, Liens critiques, Erreurs)
-        |
-        |-- Indicateurs clés :
-        |     - Total de liens scannés
-        |     - Liens brisés
-        |     - Taux de liens brisés (%)
-        |     - Nombre de doublons détectés
-        |     - Permissions trop larges
-        |     - % SLA respectés
-        |     - Nombre de liens critiques en erreur
-        |     - Répartition des types d’erreurs
-        |     - Nombre de rollbacks effectués
-        |     - Nombre de notifications envoyées / escalades
-        |
-        |-- Analyse par site :
-        |     - SiteUrl, Owner, Priority
-        |     - Graphiques comparatifs (liens brisés, doublons, permissions, SLA, rollbacks, notifications)
-        |
-        `-- Détails :
-              - SourceUrl, LinkUrl, Status, LastChecked
-              - FileName, FilePath, FileType, DuplicateGroup
-              - Permission, CorrectionDate, CorrectionAction, SLAStatus
-              - CriticalLink, ErrorType
-              - Rollback version, ArchiveDate, RestoredDate, Action
-              - NotificationType, EscalationLevel, ReportDate
-              - Filtres par type, portée, priorité
+---
+
+# Power BI – Vues et indicateurs
+
+- Vues principales
+  - Vue Active (BrokenLinkScan)
+  - Vue Communication (Notifications, Escalades, Rapports)
+  - Vue Archive (BrokenLinkArchive)
+  - Vue Rollbacks (RollbackLog)
+  - Vue Doublons (DuplicateFiles)
+  - Vue Gouvernance
+    - PermissionAudit
+    - SLA
+    - Corrections
+    - Liens critiques
+    - Erreurs
+
+- Indicateurs clés
+  - Total de liens scannés
+  - Liens brisés
+  - Taux de liens brisés (%)
+  - Nombre de doublons détectés
+  - Permissions trop larges
+  - % SLA respectés
+  - Nombre de liens critiques en erreur
+  - Répartition des types d’erreurs
+  - Nombre de rollbacks effectués
+  - Nombre de notifications envoyées / escalades
+
+- Analyse par site
+  - SiteUrl
+  - Owner
+  - Priority
+  - Graphiques comparatifs
+    - Liens brisés
+    - Doublons
+    - Permissions
+    - SLA
+    - Rollbacks
+    - Notifications
+
+- Détails
+  - SourceUrl, LinkUrl, Status, LastChecked
+  - FileName, FilePath, FileType, DuplicateGroup
+  - Permission, CorrectionDate, CorrectionAction, SLAStatus
+  - CriticalLink, ErrorType
+  - Rollback version, ArchiveDate, RestoredDate, Action
+  - NotificationType, EscalationLevel, ReportDate
+  - Filtres par type, portée, priorité
 
 # Timeline (avec buffer)
 
