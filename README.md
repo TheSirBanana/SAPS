@@ -2242,6 +2242,64 @@ Diminuer le risque systémique lié aux accès et aux secrets détenus par une s
 - **Mise à jour Playbook** et RACI selon feedback.
 - **Ajustement du calendrier** de rotation et des approbations.
 
+## I.18. Solution complète – Tableau des visites enrichi
+
+### I.18.1. Structure du tableau
+
+Chaque ligne = un fichier ou un lien.  
+Colonnes recommandées :
+
+- **Fichier/Lien** : nom du document ou URL.  
+- **Site** : emplacement (SharePoint, Teams, etc.).  
+- **Owner** : responsable du contenu.  
+- **NbVisitesTotal** : nombre total de visites sur la période.  
+- **NbUtilisateursUniques** : nombre d’utilisateurs distincts.  
+- **HeuresUtilisées** : cumul des heures de consultation.  
+- **Heures/Utilisateur** : moyenne par utilisateur.  
+- **NbVisitesJour** : visites par jour (moyenne).  
+- **NbVisitesSemaine** : visites par semaine.  
+- **NbVisitesMois** : visites par mois.  
+- **NbVisitesAnnée** : visites par année.  
+- **RatioVisites** : NbVisites fichier ÷ NbVisitesTotal du site (%).  
+
+### I.18.2. Exemple de tableau enrichi
+
+| Fichier/Lien   | Site   | Owner   | NbVisitesTotal | NbUtilisateursUniques | HeuresUtilisées | Heures/Utilisateur | NbVisitesJour | NbVisitesSemaine | NbVisitesMois | NbVisitesAnnée | RatioVisites |
+|----------------|--------|---------|----------------|-----------------------|-----------------|--------------------|---------------|------------------|---------------|----------------|--------------|
+| Doc1.pdf       | Site A | Alice   | 120            | 35                    | 8,3 h           | 0,24 h             | 5             | 25               | 110           | 1200           | 12%          |
+| Procédure.docx | Site B | Bob     | 85             | 20                    | 6,1 h           | 0,30 h             | 3             | 18               | 80            | 950            | 8%           |
+| LienCritique1  | Site A | Claire  | 200            | 50                    | 15,7 h          | 0,31 h             | 8             | 40               | 180           | 2100           | 20%          |
+
+---
+
+### I.18.3. Intégration dans SAPS
+
+- **Visites par période** : intégrées dans **Phase 2 – Validation et suivi**.  
+- **Ratio par rapport au total** : intégré dans **Phase 6 – Visualisation et communication** (Power BI).  
+- **Logs associés** :  
+  - `VisitLog` → NbVisites par période.  
+  - `UsageLog` → Heures utilisées.  
+  - `UserLog` → NbUtilisateursUniques.  
+
+---
+
+### I.18.4. Checklists opérationnelles
+
+#### I.18.4.a. Avant lancement
+- Configurer table `VisitLog` avec colonnes jour/semaine/mois/année.  
+- Définir calcul du ratio visites ÷ total site.  
+- Créer vue Power BI “Usage par période”.
+
+#### I.18.4.b. Pendant utilisation
+- Vérifier cohérence des agrégations (jour/semaine/mois/année).  
+- Contrôler ratio visites par site.  
+- Suivre consultations du tableau.
+
+#### I.18.4.c. Après 3 mois
+- Évaluer pertinence des indicateurs.  
+- Ajuster granularité (jour vs semaine).  
+- Intégrer feedback des gestionnaires.
+
 # J. Exemple de registres SAPS – Dépendance à une seule personne
 
 ## J.1. BackupTrainingLog
