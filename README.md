@@ -1,5 +1,4 @@
-# A. Fiche d’identité du projet – Version Optimisée
-**SAPS – Surveillance Automatisée des Pages SharePoint**
+# A. SAPS – Surveillance Automatisée des Pages SharePoint
 ## A.1. Objectifs
 - Détecter et suivre les liens brisés, doublons et permissions trop larges.
 - Assurer la gouvernance documentaire et la conformité des sites SharePoint et Teams.
