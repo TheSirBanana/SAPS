@@ -828,9 +828,7 @@ Donner aux utilisateurs une référence rapide pour les questions fréquentes.
 #### E.10.3.c. Contrôles
 - Vérifier que la FAQ est consultée.
 - Journaliser dans `FAQLog` : Question, Réponse, Date, NbConsultations.
-
 ### E.10.4. Intégration dans SAPS
-
 - **Tutoriels vidéo** : intégrés dans **Phase 2 – Validation et suivi** (après notifications).
 - **Infobulles Power BI** : intégrées dans **Phase 6 – Visualisation et communication**.
 - **FAQ** : intégrée dans **Phase 7 – Escalade et conformité** (support continu).
