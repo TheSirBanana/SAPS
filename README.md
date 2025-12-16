@@ -1,24 +1,16 @@
 # A. Fiche d’identité du projet – Version Optimisée
-
-## A.1. Titre
 **SAPS – Surveillance Automatisée des Pages SharePoint**
-
-## A.2. Objectifs
-
+## A.1. Objectifs
 - Détecter et suivre les liens brisés, doublons et permissions trop larges.
 - Assurer la gouvernance documentaire et la conformité des sites SharePoint et Teams.
 - Fournir un tableau de bord centralisé pour le pilotage et la communication.
-
-## A.3. Portée
-
-- Sites SharePoint et Teams (catalogués dans `SitesCataloC.xlsx`).
+## A.2. Portée
+- Sites SharePoint et Teams (catalogués dans `SitesCatalog.xlsx`).
 - Liens, documents, pages et métadonnées.
 - Gouvernance des accès et suivi des corrections.
 - Archivage et gestion du cycle de vie des données.
-
-## A.4. Livrables
-
-- **SitesCataloC.xlsx** : catalogue des sites avec métadonnées (Owner, Priority, Frequency).
+## A.3. Livrables
+- **SitesCatalog.xlsx** : catalogue des sites avec métadonnées (Owner, Priority, Frequency).
 - **Tables de suivi** :
   - `BrokenLinkScan` (liens actifs)
   - `BrokenLinkArchive` (liens archivés)
@@ -30,86 +22,120 @@
 - **Rapports automatiques** :
   - Export mensuel (Excel/PDF)
   - Notifications ciblées (Outlook/Teams)
-
-## A.5. Bénéfices
+## A.4. Bénéfices
 - Qualité documentaire : réduction des erreurs et doublons.
 - Conformité : surveillance des permissions et respect des SLA.
 - Efficacité : automatisation des scans et notifications.
 - Clarté : tableau de bord unique pour la gouvernance.
 - Évolutivité : architecture modulaire, extensible vers de nouvelles fonctionnalités.
-
 # B. Estimation annuelle des gains de temps avec SAPS
-
 ## B.1. Hypothèse de base
 - Temps sans SAPS : ~14 h/mois par site.
 - Temps avec SAPS : ~4,5 h/mois par site.
 - Gain moyen : ≈ 65–70 %.
-
 ## B.2. Calcul annuel (par site)
-
-- **Sans SAPS** : 14 h × 12 mois = **168 h/an**.
-- **Avec SAPS** : 4,5 h × 12 mois = **54 h/an**.
-- **Temps gagné** : 168 – 54 = **114 h/an**.
-- **Pourcentage de gain** : (114 ÷ 168) ≈ **68 %**.
-
-## B.3. Synthèse
-- **Par site** : ≈ 114 h économisées par an.
-- **Organisation multi‑sites** : les gains se multiplient proportionnellement.
-- **Impact stratégique** : réduction significative de la charge manuelle, meilleure conformité et adoption facilitée.
-
+- Sans SAPS : 14 × 12 = **168 h/an**
+- Avec SAPS : 4,5 × 12 = **54 h/an**
+- Temps gagné : 168 – 54 = **114 h/an**
+- % Gain : (114 ÷ 168) ≈ **68 %**
+## B.3. Calcul annuel (multi‑sites, exemple 25 sites)
+- Sans SAPS : 168 × 25 = **4200 h/an**
+- Avec SAPS : 54 × 25 = **1350 h/an**
+- Temps gagné : 4200 – 1350 = **2850 h/an**
+- % Gain : (2850 ÷ 4200) ≈ **68 %**
 # C. Analyse des risques du projet SAPS
-
 ## C.1. Risques techniques
 - Complexité des sites : surcharge possible lors des scans massifs.
 - Automatisation : dépendance aux connecteurs Power Automate.
 - Intégration Power BI : risque de latence ou données incomplètes.
 - Qualité des métadonnées : erreurs dans `SitesCatalog.xlsx` réduisent la fiabilité.
-
 ## C.2. Risques organisationnels
 - Disponibilité des Owners : corrections retardées si notifications ignorées.
-- Adoption interne : faible utilisation du tableau de bord Power BE.
+- Adoption interne : faible utilisation du tableau de bord Power BI.
 - Gouvernance documentaire : résistance au changement des équipes.
 - Responsabilités floues : absence de processus clair pour corriger les erreurs.
-
 ## C.3. Risques sécurité et conformité
 - Permissions trop larges : non-conformité prolongée si non corrigée.
 - Archivage : risque de perte d’accès à des données importantes.
 - Confidentialité : rapports exportés mal partagés → fuite d’information.
-
 ## C.4. Risques planning et ressources
 - Délais : dépendance aux validations internes.
 - Buffer insuffisant : imprévus dépassant les 20-30 % prévus.
 - Maintenance : risque de non-suivi après livraison.
-
 # D. Matrice des risques et solutions SAPS
 
-| Catégorie        | Risque                                         | Probabilité | Impact | Mitigation proposée                                                      |
-|------------------|------------------------------------------------|-------------|--------|--------------------------------------------------------------------------|
-| Technique        | Évolutions Microsoft 365 cassant les flux      | Moyenne     | Élevé  | Veille technologique, versionner les flux et rapports, RollbackLog       |
-| Technique        | Scalabilité (trop de liens/sites)              | Élevée      | Élevé  | Segmenter les scans, définir seuils, optimiser requêtes                  |
-| Technique        | Performance Power BI lente                     | Moyenne     | Moyen  | Agrégations, Power Query, filtres par site/période                       |
-| Technique        | Rollback incomplet (données externes)          | Faible      | Élevé  | Export parallèle des données, tests réguliers de restauration            |
-| Organisationnel  | Adoption faible par les Owners                 | Élevée      | Élevé  | Formation courte, guide simple, mise en avant des bénéfices              |
-| Organisationnel  | Surcharge des gestionnaires (trop d’escalades) | Moyenne     | Élevé  | Regrouper escalades, seuil critique, tableau de bord central             |
-| Organisationnel  | Manque de discipline documentaire              |  Moyenne    | Élevé  | SLA clairs, escalades automatiques, intégration dans gouvernance         |
-| Organisationnel  | Conflits de gouvernance                        | Faible      | Élevé  | Comité SAPS, rôles documentés, processus d’arbitrage                     |
-| Humain           | Résistance au changement                       | Moyenne     | Moyen  | Positionner SAPS comme aide, valoriser corrections réussies              |
-| Humain           | Manque de formation                            | Moyenne     | Élevé  | Tutoriels vidéo courts, FAQ, infobulles Power BI                         |
-| Humain           | Fatigue des notifications                      | Élevée      | Moyen  | Consolidation hebdomadaire, seuils anti-spam, Teams centralisé           |
-| Sécurité         | Permissions trop larges non corrigées          | Moyenne     | Élevé  | Escalades automatiques, suivi Power BI, audits trimestriels              |
-| Sécurité         | Export sensible (PDF/Excel)                    | Moyenne     | Élevé  | Restreindre exports, filigrane “Confidentiel”, stockage sécurisé         |
-| Sécurité         | Archivage long terme non conforme              | Faible      | Élevé  | Politique de conservation, conformité RGPD/Loi 25, purge validée         |
-| Pilotage         | Sous-estimation du temps de maintenance        | Moyenne     | Élevé  | Allouer 10–15 % du temps, points mensuels, registre des ajustements      |
-| Pilotage         | Manque de sponsor exécutif                     | Moyenne     | Élevé  | Appui officiel, présenter SAPS comme outil de conformité                 |
-| Pilotage         | Dépendance à une seule personne                | Élevée      | Élevé  | Former un backup, documentation exhaustive, partage des responsabilités  |
+## D.1. Technique
+- **Évolutions Microsoft 365 cassant les flux**  
+  Probabilité : Moyenne | Impact : Élevé  
+  Mitigation : Veille technologique, versionner flux/rapports, RollbackLog  
 
-## D.1. Stratégies globales de mitigation
+- **Scalabilité (trop de liens/sites)**  
+  Probabilité : Élevée | Impact : Élevé  
+  Mitigation : Segmenter scans, définir seuils, optimiser requêtes  
 
-- **Technique** : tests de charge, scripts de validation des URLs.  
-- **Organisationnel** : processus clair de correction avec SLA et escalade.  
-- **Sécurité** : limiter la diffusion des rapports aux personnes autorisées.  
-- **Planning** : buffer de 30 % et points de contrôle réguliers.  
-- **Maintenance** : documentation complète pour assurer la pérennité.
+- **Performance Power BI lente**  
+  Probabilité : Moyenne | Impact : Moyen  
+  Mitigation : Agrégations, Power Query, filtres par site/période  
+
+- **Rollback incomplet (données externes)**  
+  Probabilité : Faible | Impact : Élevé  
+  Mitigation : Export parallèle, tests réguliers de restauration  
+
+## D.2. Organisationnel
+- **Adoption faible par les Owners**  
+  Probabilité : Élevée | Impact : Élevé  
+  Mitigation : Formation courte, guide simple, mise en avant bénéfices  
+
+- **Surcharge des gestionnaires (trop d’escalades)**  
+  Probabilité : Moyenne | Impact : Élevé  
+  Mitigation : Regrouper escalades, seuil critique, tableau de bord central  
+
+- **Manque de discipline documentaire**  
+  Probabilité : Moyenne | Impact : Élevé  
+  Mitigation : SLA clairs, escalades automatiques, intégration gouvernance  
+
+- **Conflits de gouvernance**  
+  Probabilité : Faible | Impact : Élevé  
+  Mitigation : Comité SAPS, rôles documentés, processus d’arbitrage  
+
+## D.3. Humain
+- **Résistance au changement**  
+  Probabilité : Moyenne | Impact : Moyen  
+  Mitigation : Positionner SAPS comme aide, valoriser corrections réussies  
+
+- **Manque de formation**  
+  Probabilité : Moyenne | Impact : Élevé  
+  Mitigation : Tutoriels vidéo courts, FAQ, infobulles Power BI  
+
+- **Fatigue des notifications**  
+  Probabilité : Élevée | Impact : Moyen  
+  Mitigation : Consolidation hebdomadaire, seuils anti‑spam, canal Teams centralisé  
+
+## D.4. Sécurité
+- **Permissions trop larges non corrigées**  
+  Probabilité : Moyenne | Impact : Élevé  
+  Mitigation : Escalades automatiques, suivi Power BI, audits trimestriels  
+
+- **Export sensible (PDF/Excel)**  
+  Probabilité : Moyenne | Impact : Élevé  
+  Mitigation : Restreindre exports, filigrane “Confidentiel”, stockage sécurisé  
+
+- **Archivage long terme non conforme**  
+  Probabilité : Faible | Impact : Élevé  
+  Mitigation : Politique de conservation, conformité RGPD/Loi 25, purge validée  
+
+## D.5. Pilotage
+- **Sous‑estimation du temps de maintenance**  
+  Probabilité : Moyenne | Impact : Élevé  
+  Mitigation : Allouer 10–15 % du temps, points mensuels, registre ajustements  
+
+- **Manque de sponsor exécutif**  
+  Probabilité : Moyenne | Impact : Élevé  
+  Mitigation : Appui officiel, présenter SAPS comme outil de conformité  
+
+- **Dépendance à une seule personne**  
+  Probabilité : Élevée | Impact : Élevé  
+  Mitigation : Former backup, documentation exhaustive, partage responsabilités  
 
 # E. Solutions du projet SAPS
 
@@ -118,15 +144,15 @@
 ### E.1.1. Veille technologique
 
 #### E.1.1.a. Sources officielles
-- **Microsoft 365 Roadmap** : filtrer SharePoint, Teams, Power Automate, Power BE.
+- **Microsoft 365 Roadmap** : filtrer SharePoint, Teams, Power Automate, Power BI.
 - **Message Center** : vérifier hebdomadairement les annonces d’impact.
-- **Blogs produit et release notes** : Power Platform, Power BE.
+- **Blogs produit et release notes** : Power Platform, Power BI.
 
 #### E.1.1.b. Canal d’alerte
 - Créer un canal Teams **“SAPS – Veille”**.
 - Configurer des alertes (courriel ou Teams) pour les mots‑clés : *API*, *connector*, *SharePoint*, *Power Automate*, *Power BI*.
 
-#### E.1.1.B. Cadence
+#### E.1.1.c. Cadence
 - **Hebdomadaire** : scan rapide des annonces, noter les changements à risque.
 - **Mensuel** : revue d’impact, décider des tests de régression.
 
@@ -152,7 +178,7 @@ Créer une liste **RoadmapWatch** avec colonnes :
 - Nommage versionné : `SAPS.Core_v1.4.2_YYYYMMDD.zip`.
 - Stocker dans SharePoint/OneDrive avec historique des versions.
 
-#### E.1.2.B. Contrôles
+#### E.1.2.c. Contrôles
 - Checklist avant commit :
   - Connecteurs authentifiés
   - Erreurs gérées (try/catch)
@@ -177,7 +203,7 @@ Créer une liste **RoadmapWatch** avec colonnes :
 - Déploiement via **pipelines** : Dev → Test → Prod.
 - Interdire publication directe en Prod.
 
-#### E.1.3.B. Performance
+#### E.1.3.c. Performance
 - Déplacer calculs lourds en Power Query.
 - Créer tables d’agrégation.
 - Paramètres de requête pour filtrer par site/période.
@@ -205,7 +231,7 @@ Créer une liste **RoadmapWatch** avec colonnes :
 | Result        | Résultat, tests post‑restauration, anomalies     |
 
 #### E.1.4.b. Processus de restauration
-1. **Déclenchement** : détecter incident, ouvrir entrée RollbackLoC.
+1. **Déclenchement** : détecter incident, ouvrir entrée RollbackLog.
 2. **Sélectionner version stable** : vérifier dépendances.
 3. **Restaurer** :
    - Flows : importer solution Managed.
@@ -214,7 +240,7 @@ Créer une liste **RoadmapWatch** avec colonnes :
 5. **Notifier** : communication automatique aux Owners/gestionnaires.
 6. **Clôturer** : mise à jour RollbackLog, analyse cause racine.
 
-#### E.1.4.B. Checklists
+#### E.1.4.c. Checklists
 - **Avant rollback** : identifier version stable, capturer paramètres, geler déploiements.
 - **Pendant rollback** : importer solution/rapport, appliquer variables, tests de régression.
 - **Après rollback** : communication, journalisation, plan de hotfix.
@@ -242,7 +268,7 @@ Créer une liste **RoadmapWatch** avec colonnes :
 3. **Stocker les résultats** par lot dans une table intermédiaire `ScanBatch`.
 4. **Assembler les résultats** en fin de cycle dans `BrokenLinkScan`.
 
-#### E.2.1.B. Contrôles
+#### E.2.1.c. Contrôles
 - Vérifier que chaque lot est complet (pas de liens manquants).
 - Journaliser dans `BatchLog` : Site, LotID, NbLiens, Durée, Statut.
 
@@ -261,7 +287,7 @@ Limiter la taille des cycles pour éviter dépassements de temps ou quotas Micro
    - Message Teams/Outlook si seuil dépassé.
    - Indiquer le nombre de cycles créés.
 
-#### E.2.2.B. Contrôles
+#### E.2.2.c. Contrôles
 - Ajouter un indicateur dans Power BI : **Volume par cycle**.
 - Colorer en rouge si seuil dépassé.
 
@@ -281,7 +307,7 @@ Réduire la charge et accélérer les traitements.
    - Charger uniquement les tables nécessaires.
    - Créer des vues agrégées pour les indicateurs globaux.
 
-#### E.2.3.B. Contrôles
+#### E.2.3.c. Contrôles
 - Mesurer le temps moyen par cycle.
 - Comparer avant/après optimisation.
 - Journaliser dans `PerfLog` : NbLiens, Colonnes, Durée, Gain.
@@ -297,17 +323,17 @@ Réduire la charge et accélérer les traitements.
 
 ### E.2.5. Checklists opérationnelles
 
-#### 1.2.5.a. Avant scan
+#### E.2.5.a. Avant scan
 - Vérifier `BatchSize` paramétré.
 - Vérifier seuil global (10 000 liens).
 - Vérifier filtres actifs (colonnes minimales).
 
-#### 1.2.5.b. Pendant scan
+#### E.2.5.b. Pendant scan
 - Journaliser chaque lot dans `BatchLog`.
 - Contrôler temps d’exécution par lot.
 - Générer alertes si seuil dépassé.
 
-#### 1.2.5.B. Après scan
+#### E.2.5.c. Après scan
 - Consolider résultats dans `BrokenLinkScan`.
 - Mettre à jour `PerfLog`.
 - Vérifier indicateurs Power BI (temps, volume, colonnes).
@@ -317,7 +343,7 @@ Réduire la charge et accélérer les traitements.
 ### E.3.1. Employer des agrégations et tables résumées
 
 #### E.3.1.a. Objectif
-Réduire la charge de calcul et accélérer l’affichage des rapports en Power BE.
+Réduire la charge de calcul et accélérer l’affichage des rapports en Power BI.
 
 #### E.3.1.b. Étapes
 1. **Créer des tables d’agrégation** :
@@ -328,7 +354,7 @@ Réduire la charge de calcul et accélérer l’affichage des rapports en Power 
    - `TauxErreur = DIVIDE(NbLiensBrisés, NbLiensTotal)`
 3. **Stocker les agrégations** dans une table dédiée pour éviter recalculs à chaque visualisation.
 
-#### E.3.1.B. Contrôles
+#### E.3.1.c. Contrôles
 - Vérifier que les agrégations couvrent 80 % des besoins.
 - Comparer temps de rafraîchissement avant/après (objectif : gain > 30 %).
 
@@ -337,7 +363,7 @@ Réduire la charge de calcul et accélérer l’affichage des rapports en Power 
 #### E.3.2.a. Objectif
 Alléger le modèle DAX en déplaçant les transformations en amont.
 
-#### 1.3.2.b. Étapes
+#### E.3.2.b. Étapes
 1. **Nettoyer les données dans Power Query** :
    - Supprimer colonnes inutiles.
    - Normaliser formats (dates, URLs).
@@ -349,7 +375,7 @@ Alléger le modèle DAX en déplaçant les transformations en amont.
    - Exemple : `ErrorType` (404, 403, Timeout).
    - Exemple : `CriticalFlag` (Oui/Non).
 
-#### E.3.2.B. Contrôles
+#### E.3.2.c. Contrôles
 - Vérifier que le modèle Power BI contient uniquement les colonnes utiles.
 - Mesurer la taille du dataset (objectif : < 1 Go).
 - Journaliser dans `PerfLog` : NbColonnes, NbTables, DuréeRefresh.
@@ -370,7 +396,7 @@ Limiter la volumétrie affichée et améliorer la lisibilité des rapports.
    - Vue “Site” : Owner, NbLiens, NbDoublons, SLA.
    - Vue “Période” : NbLiensBrisés, %Erreur, Rollbacks.
 
-#### E.3.3.B. Contrôles
+#### E.3.3.c. Contrôles
 - Vérifier que les filtres réduisent le temps de rendu.
 - Mesurer temps moyen d’affichage (objectif : < 3 secondes par visuel).
 - Journaliser dans `PerfLog` : Site, Période, DuréeAffichage.
@@ -396,7 +422,7 @@ Limiter la volumétrie affichée et améliorer la lisibilité des rapports.
 - Contrôler temps d’affichage des visuels.
 - Vérifier cohérence des filtres appliqués.
 
-#### E.3.5.B. Après optimisation
+#### E.3.5.c. Après optimisation
 - Mettre à jour `PerfLog`.
 - Comparer indicateurs avant/après optimisation.
 - Documenter les gains de performance.
@@ -419,13 +445,13 @@ Assurer que les restaurations SAPS tiennent compte des systèmes externes qui é
    - Vérification mensuelle des URLs et permissions.
    - Journaliser les changements (ajout/suppression de sites, modification de connecteurs).
 
-#### E.4.1.B. Contrôles
+#### E.4.1.c. Contrôles
 - Vérifier que chaque rollback inclut une revue des dépendances.
 - Ajouter un champ `AffectedScope` dans RollbackLog pour noter les systèmes externes impactés.
 
 ### E.4.2. Conserver des exports parallèles des données
 
-#### E.4.2.a Objectif
+#### E.4.2.a. Objectif
 Garantir une copie indépendante des données pour restaurer même si les flux échouent.
 
 #### E.4.2.b. Étapes
@@ -440,7 +466,7 @@ Garantir une copie indépendante des données pour restaurer même si les flux �
    - Power Automate → export mensuel automatique.
    - Nommage : `SAPS_BrokenLinkScan_YYYYMMDD.xlsx`.
 
-#### E.4.2.c Contrôles
+#### E.4.2.c. Contrôles
 - Vérifier que les exports sont complets et lisibles.
 - Journaliser dans `ExportLog` : Table, Date, Format, Statut.
 
@@ -460,7 +486,7 @@ Valider que les rollbacks fonctionnent réellement et ne sont pas seulement thé
    - NbLiensBrisés, %Erreur, NbDoublons, Permissions.
    - Comparer avec les valeurs attendues.
 
-#### E.4.3.B. Contrôles
+#### E.4.3.c. Contrôles
 - Documenter chaque test dans `TestLog` : Date, Version restaurée, Résultat, Anomalies.
 - Escalader automatiquement si un rollback échoue.
 
@@ -485,7 +511,7 @@ Valider que les rollbacks fonctionnent réellement et ne sont pas seulement thé
 - Recharger données depuis exports parallèles.
 - Valider cohérence des indicateurs.
 
-#### E.4.5.B. Après rollback
+#### E.4.5.c. Après rollback
 - Mettre à jour `RollbackLog` et `TestLog`.
 - Documenter anomalies rencontrées.
 - Planifier correctifs si nécessaire.
@@ -508,7 +534,7 @@ Assurer que les Owners comprennent rapidement SAPS et savent corriger les erreur
    - Slides concises (5–6 pages).
    - Démo live dans Power BI et SharePoint.
 
-#### E.5.1.B. Contrôles
+#### E.5.1.c. Contrôles
 - Évaluer la participation (nombre d’Owners formés).
 - Mesurer la correction des erreurs après formation.
 - Journaliser dans `TrainingLog` : Date, Participants, Sites, Résultats.
@@ -530,7 +556,7 @@ Donner aux Owners un support rapide et accessible pour corriger les erreurs.
    - Révision tous les 6 mois.
    - Ajout des nouvelles fonctionnalités (ex. Rollbacks).
 
-#### E.5.2.B. Contrôles
+#### E.5.2.c. Contrôles
 - Vérifier que le guide est téléchargé/utilisé.
 - Ajouter un QR code vers la FAQ SAPS.
 - Journaliser dans `DocLog` : Version, Date, Auteur, Changements.
@@ -552,8 +578,8 @@ Motiver les Owners à utiliser SAPS en montrant les avantages concrets.
    - Rapport mensuel envoyé aux Owners.
    - Mise en avant des “success stories” (sites ayant corrigé >90 % des erreurs).
 
-#### E.5.3.B. Contrôles
-- Vérifier que les indicateurs sont visibles dans Power BE.
+#### E.5.3.c. Contrôles
+- Vérifier que les indicateurs sont visibles dans Power BI.
 - Mesurer l’évolution de l’adoption (nombre de corrections effectuées).
 - Journaliser dans `AdoptionLog` : Site, Owner, NbCorrections, SLA, Gains.
 
@@ -572,14 +598,14 @@ Motiver les Owners à utiliser SAPS en montrant les avantages concrets.
 #### E.5.5.a. Avant lancement
 - Planifier sessions de formation.
 - Rédiger guide utilisateur 1 page.
-- Configurer indicateurs adoption dans Power BE.
+- Configurer indicateurs adoption dans Power BI.
 
 #### E.5.5.b. Pendant utilisation
 - Former les nouveaux Owners.
 - Diffuser le guide utilisateur.
 - Communiquer les bénéfices via rapports mensuels.
 
-#### E.5.5.B. Après 3 mois
+#### E.5.5.c. Après 3 mois
 - Vérifier taux de correction des erreurs.
 - Mettre à jour guide utilisateur.
 - Ajuster formation selon feedback.
@@ -601,7 +627,7 @@ Motiver les Owners à utiliser SAPS en montrant les avantages concrets.
 3. **Stocker les escalades consolidées** :
    - Table `EscalationSummary` avec colonnes : Site, Période, NbEscalades, NbLiensNonCorrigés.
 
-#### E.6.1.B. Contrôles
+#### E.6.1.c. Contrôles
 - Vérifier que chaque gestionnaire reçoit max 1 notification par site/période.
 - Journaliser dans `EscalationLog` : Site, Période, NbEscalades, Statut.
 
@@ -620,7 +646,7 @@ Ne pas surcharger les gestionnaires avec des erreurs mineures ou isolées.
 3. **Notifier uniquement les cas critiques** :
    - Message clair : “Seuil dépassé – Escalade déclenchée”.
 
-#### E.6.2.B. Contrôles
+#### E.6.2.c. Contrôles
 - Vérifier que les escalades envoyées respectent le seuil.
 - Ajouter indicateur Power BI : NbEscaladesCritiques vs NbEscaladesTotales.
 - Journaliser dans `EscalationLog` : Seuil, Déclenchement, Date.
@@ -642,7 +668,7 @@ Centraliser les escalades et éviter la dispersion des informations.
    - Rafraîchissement quotidien.
    - Export mensuel consolidé.
 
-#### E.6.3.B. Contrôles
+#### E.6.3.c. Contrôles
 - Vérifier que les gestionnaires consultent Power BI au lieu de mails multiples.
 - Mesurer temps de réaction aux escalades.
 - Journaliser dans `DashboardLog` : NbConsultations, Sites, Périodes.
@@ -669,7 +695,7 @@ Centraliser les escalades et éviter la dispersion des informations.
 - Contrôler respect du seuil critique.
 - Suivre consultations du tableau de bord.
 
-#### E.6.5.B. Après 3 mois
+#### E.6.5.c. Après 3 mois
 - Évaluer réduction du nombre de notifications.
 - Ajuster seuil critique si nécessaire.
 - Améliorer vue Power BI selon feedback.
@@ -692,7 +718,7 @@ Faire en sorte que SAPS ne soit pas perçu comme un outil optionnel, mais comme 
    - Utiliser les rapports SAPS comme preuve de conformité.
    - Intégrer SAPS dans les cycles de revue documentaire.
 
-#### E.7.1.B. Contrôles
+#### E.7.1.c. Contrôles
 - Vérifier que SAPS est mentionné dans les chartes de gouvernance.
 - Journaliser dans `GovernanceLog` : Processus, Date d’intégration, Responsable.
 
@@ -713,7 +739,7 @@ Donner aux Owners et gestionnaires des délais précis et mesurables pour corrig
    - Message Outlook/Teams si SLA dépassé.
    - Escalade au gestionnaire si non corrigé.
 
-#### E.7.2.B. Contrôles
+#### E.7.2.c. Contrôles
 - Vérifier que les SLA sont visibles dans tous les rapports.
 - Journaliser dans `SLAStatusLog` : Site, Owner, SLA, Statut.
 
@@ -732,7 +758,7 @@ Assurer que les erreurs non corrigées ne restent pas bloquées au niveau Owner.
    - Message consolidé (hebdomadaire/mensuel).
    - Indiquer les sites en non‑conformité.
 
-#### E.7.3.B. Contrôles
+#### E.7.3.c. Contrôles
 - Vérifier que toutes les escalades sont tracées.
 - Mesurer temps moyen de correction après escalade.
 - Journaliser dans `EscalationLog`.
@@ -747,19 +773,19 @@ Assurer que les erreurs non corrigées ne restent pas bloquées au niveau Owner.
   - `SLAStatusLog` pour suivi des délais.
   - `EscalationLog` pour suivi des escalades.
 
-### 1.7.5. Checklists opérationnelles
+### E.7.5. Checklists opérationnelles
 
-#### 1.7.5.a. Avant lancement
+#### E.7.5.a. Avant lancement
 - Intégrer SAPS dans chartes de gouvernance.
 - Définir SLA standards (7j, 14j, 30j).
 - Configurer escalades automatiques.
 
-#### 1.7.5.b. Pendant utilisation
-- Vérifier SLA visibles dans Power BE.
+#### E.7.5.b. Pendant utilisation
+- Vérifier SLA visibles dans Power BI.
 - Contrôler escalades automatiques.
 - Suivre corrections dans `GovernanceLog`.
 
-#### 1.7.5.B. Après 3 mois
+#### E.7.5.c. Après 3 mois
 - Évaluer % SLA respectés.
 - Ajuster délais si nécessaire.
 - Améliorer processus d’escalade selon feedback.
@@ -783,7 +809,7 @@ Assurer que les erreurs non corrigées ne restent pas bloquées au niveau Owner.
    - Validation des rollbacks critiques.
    - Arbitrage des conflits entre Owners et Gestionnaires.
 
-#### E.8.1.B. Contrôles
+#### E.8.1.c. Contrôles
 - Journaliser dans `GovernanceCommitteeLog` : Date, Participants, Décisions, Actions.
 - Vérifier que les décisions sont appliquées dans SAPS.
 
@@ -796,14 +822,14 @@ Clarifier les responsabilités pour éviter les zones grises et les conflits.
 1. **Rédiger une matrice RACI** :
    - Owner : Responsable de la correction des erreurs.
    - Gestionnaire : Supervise les SLA et escalades.
-   - Admin : Configure SAPS, valide rollbacks, gère Power BE.
+   - Admin : Configure SAPS, valide rollbacks, gère Power BI.
 2. **Publier la matrice** :
    - Disponible dans SharePoint (bibliothèque Gouvernance).
    - Accessible via Power BI (vue Gouvernance).
 3. **Mettre à jour régulièrement** :
    - Révision annuelle ou lors de changements organisationnels.
 
-#### E.8.2.B. Contrôles
+#### E.8.2.c. Contrôles
 - Vérifier que chaque rôle est attribué à une personne réelle.
 - Journaliser dans `RoleResponsibilityLog` : Rôle, Nom, Date d’attribution.
 
@@ -822,7 +848,7 @@ Clarifier les responsabilités pour éviter les zones grises et les conflits.
 3. **Tracer les arbitrages** :
    - Table `ArbitrationLog` : Site, Problème, Parties impliquées, Décision, Date.
 
-#### E.8.3.B. Contrôles
+#### E.8.3.c. Contrôles
 - Vérifier que tous les arbitrages sont documentés.
 - Mesurer temps moyen de résolution.
 - Journaliser dans `ArbitrationLog`.
@@ -841,7 +867,7 @@ Clarifier les responsabilités pour éviter les zones grises et les conflits.
 
 #### E.8.5.a. Avant lancement
 - Constituer comité de gouvernance.
-- Rédiger matrice RACE.
+- Rédiger matrice RACI.
 - Définir workflow d’arbitrage.
 
 #### E.8.5.b. Pendant utilisation
@@ -849,7 +875,7 @@ Clarifier les responsabilités pour éviter les zones grises et les conflits.
 - Vérifier rôles attribués et mis à jour.
 - Suivre arbitrages dans `ArbitrationLog`.
 
-#### E.8.5.B. Après 6 mois
+#### E.8.5.c. Après 6 mois
 - Évaluer efficacité du comité.
 - Ajuster matrice RACI si nécessaire.
 - Améliorer workflow d’arbitrage selon feedback.
@@ -874,7 +900,7 @@ Faire percevoir SAPS comme un support à la productivité et à la qualité docu
    - Messages Teams/Outlook.
    - Documentation officielle.
 
-#### E.9.1.B. Contrôles
+#### E.9.1.c. Contrôles
 - Vérifier que les communications utilisent un vocabulaire positif.
 - Journaliser dans `ChangeManagementLog` : Date, Message, Canal, Feedback.
 
@@ -894,8 +920,8 @@ Montrer les bénéfices concrets pour convaincre les utilisateurs de l’utilit�
    - Rapport mensuel avec gains par site.
    - Mise en avant des sites exemplaires.
 
-#### E.9.2.B. Contrôles
-- Vérifier que les gains sont visibles dans Power BE.
+#### E.9.2.c. Contrôles
+- Vérifier que les gains sont visibles dans Power BI.
 - Journaliser dans `BenefitLog` : Site, Indicateur, Gain, Date.
 
 ### E.9.3. Valoriser les corrections réussies dans les rapports
@@ -914,7 +940,7 @@ Encourager les utilisateurs en mettant en avant leurs réussites plutôt que leu
    - Liste des sites exemplaires.
    - Diffusion trimestrielle au comité de gouvernance.
 
-#### E.9.3.B. Contrôles
+#### E.9.3.c. Contrôles
 - Vérifier que les rapports incluent une section positive.
 - Journaliser dans `SuccessLog` : Site, Owner, NbCorrections, SLA respectés.
 
@@ -932,7 +958,7 @@ Encourager les utilisateurs en mettant en avant leurs réussites plutôt que leu
 
 #### E.9.5.a. Avant lancement
 - Préparer messages positifs (outil d’aide, gains).
-- Configurer indicateurs comparatifs dans Power BE.
+- Configurer indicateurs comparatifs dans Power BI.
 - Créer section “Succès” dans rapports.
 
 #### E.9.5.b. Pendant utilisation
@@ -940,7 +966,7 @@ Encourager les utilisateurs en mettant en avant leurs réussites plutôt que leu
 - Mettre en avant gains dans rapports mensuels.
 - Envoyer notifications de réussite aux Owners.
 
-#### E.9.5.B. Après 6 mois
+#### E.9.5.c. Après 6 mois
 - Évaluer perception des utilisateurs (feedback).
 - Ajuster communication si SAPS est perçu comme outil de contrôle.
 - Renforcer valorisation des corrections réussies.
@@ -956,15 +982,15 @@ Permettre aux utilisateurs de comprendre rapidement SAPS sans investir trop de t
 1. **Identifier les cas d’usage clés** :
    - Validation des liens.
    - Correction des doublons.
-   - Lecture des rapports Power BE.
+   - Lecture des rapports Power BI.
 2. **Produire des vidéos courtes (2‑3 min)** :
    - Format simple : démonstration écran + voix off.
    - Scénario clair : problème → solution → bénéfice.
 3. **Diffuser les vidéos** :
    - Hébergement dans SharePoint ou Stream.
-   - Lien intégré dans Teams et Power BE.
+   - Lien intégré dans Teams et Power BI.
 
-#### E.10.1.B. Contrôles
+#### E.10.1.c. Contrôles
 - Vérifier que les vidéos sont accessibles à tous les Owners.
 - Journaliser dans `TrainingLog` : Titre, Durée, Date, NbVues.
 
@@ -978,13 +1004,13 @@ Offrir une aide contextuelle directement dans l’outil, sans quitter le rapport
    - Exemple : survol d’un indicateur → explication du SLA.
    - Exemple : survol d’un graphique → définition des doublons.
 2. **Ajouter des guides intégrés** :
-   - Bouton “Aide” dans Power BE.
+   - Bouton “Aide” dans Power BI.
    - Lien vers tutoriels vidéo et FAQ.
 3. **Mettre à jour régulièrement** :
    - Ajouter les nouvelles fonctionnalités.
    - Adapter selon feedback des utilisateurs.
 
-#### E.10.2.B. Contrôles
+#### E.10.2.c. Contrôles
 - Vérifier que les infobulles apparaissent correctement.
 - Journaliser dans `GuideLog` : Rapport, Infobulle, Date, Auteur.
 
@@ -1004,11 +1030,11 @@ Donner aux utilisateurs une référence rapide pour les questions fréquentes.
    - Ajouter nouvelles questions selon feedback.
    - Révision trimestrielle.
 
-#### E.10.3.B. Contrôles
+#### E.10.3.c. Contrôles
 - Vérifier que la FAQ est consultée.
 - Journaliser dans `FAQLog` : Question, Réponse, Date, NbConsultations.
 
-### 1.10.4. Intégration dans SAPS
+### E.10.4. Intégration dans SAPS
 
 - **Tutoriels vidéo** : intégrés dans **Phase 2 – Validation et suivi** (après notifications).
 - **Infobulles Power BI** : intégrées dans **Phase 6 – Visualisation et communication**.
@@ -1022,7 +1048,7 @@ Donner aux utilisateurs une référence rapide pour les questions fréquentes.
 
 #### E.10.5.a. Avant lancement
 - Produire tutoriels vidéo (2‑3 min).
-- Configurer infobulles dans Power BE.
+- Configurer infobulles dans Power BI.
 - Rédiger FAQ initiale.
 
 #### E.10.5.b. Pendant utilisation
@@ -1030,7 +1056,7 @@ Donner aux utilisateurs une référence rapide pour les questions fréquentes.
 - Vérifier accessibilité de la FAQ.
 - Collecter feedback utilisateurs.
 
-#### E.10.5.B. Après 3 mois
+#### E.10.5.c. Après 3 mois
 - Évaluer taux de consultation des vidéos et FAQ.
 - Mettre à jour guides et FAQ.
 - Ajouter tutoriels selon nouvelles fonctionnalités.
@@ -1054,7 +1080,7 @@ Réduire la surcharge d’alertes quotidiennes et fournir une vue synthétique a
    - Bibliothèque SharePoint `SAPS_WeeklyReports`.
    - Activer la conservation des versions.
 
-#### E.11.1.B. Contrôles
+#### E.11.1.c. Contrôles
 - Vérifier que les Owners reçoivent un seul rapport par semaine.
 - Journaliser dans `NotificationLog` : Site, Période, NbNotifications, ConsolidationOK.
 
@@ -1074,7 +1100,7 @@ Réduire la surcharge d’alertes quotidiennes et fournir une vue synthétique a
    - Lien vers Power BI (vue escalades).
    - Lien vers FAQ et guides.
 
-#### E.11.2.B. Contrôles
+#### E.11.2.c. Contrôles
 - Vérifier que toutes les alertes passent par Teams.
 - Journaliser dans `TeamsLog` : Date, Site, NbAlertes, NbConsultations.
 
@@ -1094,12 +1120,12 @@ Limiter les notifications aux cas réellement critiques.
 3. **Notifier uniquement les cas critiques** :
    - Message clair : “Seuil dépassé – Action requise”.
 
-#### E.11.3.B. Contrôles
+#### E.11.3.c. Contrôles
 - Vérifier que les notifications respectent les seuils.
 - Ajouter indicateur Power BI : NbAlertesCritiques vs NbAlertesTotales.
 - Journaliser dans `ThresholdLog` : Site, Seuil, Déclenchement, Date.
 
-### 11.11.4. Intégration dans SAPS
+### E.11.4. Intégration dans SAPS
 
 - **Rapports hebdomadaires** : intégrés dans **Phase 3 – Communication automatique**.
 - **Canal Teams** : intégré dans **Phase 7 – Escalade et conformité**.
@@ -1109,19 +1135,19 @@ Limiter les notifications aux cas réellement critiques.
   - `TeamsLog` pour suivi des alertes centralisées.
   - `ThresholdLog` pour suivi des seuils.
 
-### 11.11.5. Checklists opérationnelles
+### E.11.5. Checklists opérationnelles
 
-#### 11.11.5.a. Avant lancement
+#### E.11.5.a. Avant lancement
 - Configurer rapport hebdomadaire consolidé.
 - Créer canal Teams “SAPS – Alertes”.
 - Définir seuils critiques.
 
-#### 11.11.5.b. Pendant utilisation
+#### E.11.5.b. Pendant utilisation
 - Vérifier consolidation des notifications.
 - Contrôler passage par Teams.
 - Suivre déclenchements de seuils.
 
-#### 11.11.5.B. Après 3 mois
+#### E.11.5.c. Après 3 mois
 - Évaluer réduction du nombre de notifications.
 - Ajuster seuils si nécessaire.
 - Améliorer format du rapport hebdomadaire selon feedback.
@@ -1145,7 +1171,7 @@ S’assurer que les permissions trop larges sont corrigées rapidement et ne res
 3. **Tracer les escalades** :
    - Table `PermissionEscalationLog` : Site, Ressource, Owner, Gestionnaire, DateEscalade, Statut.
 
-#### E.12.1.B. Contrôles
+#### E.12.1.c. Contrôles
 - Vérifier que toutes les escalades sont envoyées.
 - Journaliser dans `PermissionEscalationLog`.
 
@@ -1167,7 +1193,7 @@ Donner une visibilité claire et immédiate sur les permissions critiques.
    - Par site, par Owner, par période.
    - Vue consolidée pour les gestionnaires.
 
-#### E.12.2.B. Contrôles
+#### E.12.2.c. Contrôles
 - Vérifier que les indicateurs rouges apparaissent correctement.
 - Journaliser dans `PermissionDashboardLog` : NbPermissions, NbCorrigées, %Corrigées.
 
@@ -1189,7 +1215,7 @@ Assurer un contrôle régulier et documenté des permissions pour éviter les d�
    - Envoyer rapport au comité de gouvernance.
    - Inclure recommandations et actions correctives.
 
-#### E.12.3.B. Contrôles
+#### E.12.3.c. Contrôles
 - Vérifier que l’audit est réalisé chaque trimestre.
 - Journaliser dans `PermissionAuditLog` : DateAudit, NbPermissions, NbCorrigées, Actions.
 
@@ -1200,7 +1226,7 @@ Assurer un contrôle régulier et documenté des permissions pour éviter les d�
 - **Audits trimestriels** : intégrés dans **Phase 5 – Gouvernance avancée**.
 - **Logs associés** :
   - `PermissionEscalationLog` pour suivi des escalades.
-  - `PermissionDashboardLog` pour suivi Power BE.
+  - `PermissionDashboardLog` pour suivi Power BI.
   - `PermissionAuditLog` pour suivi des audits.
 
 ### E.12.5. Checklists opérationnelles
@@ -1212,10 +1238,10 @@ Assurer un contrôle régulier et documenté des permissions pour éviter les d�
 
 #### E.12.5.b. Pendant utilisation
 - Vérifier escalades envoyées.
-- Contrôler indicateurs rouges dans Power BE.
+- Contrôler indicateurs rouges dans Power BI.
 - Réaliser audits trimestriels.
 
-#### E.12.5.B. Après 6 mois
+#### E.12.5.c. Après 6 mois
 - Évaluer % permissions corrigées.
 - Ajuster seuils d’escalade si nécessaire.
 - Améliorer processus d’audit selon feedback.
@@ -1237,7 +1263,7 @@ Limiter la diffusion des données sensibles en contrôlant qui peut exporter les
 3. **Tracer les exports** :
    - Table `ExportLog` : Utilisateur, Rapport, Format, Date, Statut.
 
-#### E.13.1.B. Contrôles
+#### E.13.1.c. Contrôles
 - Vérifier que seuls les administrateurs apparaissent dans `ExportLog`.
 - Auditer mensuellement les exports réalisés.
 
@@ -1256,7 +1282,7 @@ Marquer visuellement les exports pour rappeler leur caractère sensible.
 3. **Mettre à jour régulièrement** :
    - Adapter le filigrane selon les politiques internes (ex. “Usage interne uniquement”).
 
-#### E.13.2.B. Contrôles
+#### E.13.2.c. Contrôles
 - Vérifier que chaque export contient le filigrane.
 - Journaliser dans `WatermarkLog` : Rapport, Date, Filigrane appliqué.
 
@@ -1276,7 +1302,7 @@ Empêcher la diffusion non contrôlée des fichiers exportés.
    - Power Automate → déplacer automatiquement les exports vers `SAPS_ExportsSecure`.
    - Interdire le stockage local non contrôlé.
 
-#### E.13.3.B. Contrôles
+#### E.13.3.c. Contrôles
 - Vérifier que tous les exports sont stockés dans l’espace sécurisé.
 - Journaliser dans `SecureStorageLog` : Fichier, Date, Utilisateur, Emplacement.
 
@@ -1293,7 +1319,7 @@ Empêcher la diffusion non contrôlée des fichiers exportés.
 ### E.13.5. Checklists opérationnelles
 
 #### E.13.5.a. Avant lancement
-- Configurer restrictions d’export dans Power BE.
+- Configurer restrictions d’export dans Power BI.
 - Ajouter filigrane “Confidentiel” aux rapports.
 - Créer bibliothèque sécurisée `SAPS_ExportsSecure`.
 
@@ -1302,7 +1328,7 @@ Empêcher la diffusion non contrôlée des fichiers exportés.
 - Contrôler présence du filigrane.
 - Suivre stockage dans `SAPS_ExportsSecure`.
 
-#### E.13.5.B. Après 6 mois
+#### E.13.5.c. Après 6 mois
 - Auditer les exports réalisés.
 - Évaluer conformité du stockage sécurisé.
 - Ajuster filigrane et politiques selon feedback.
@@ -1325,11 +1351,11 @@ Empêcher la diffusion non contrôlée des fichiers exportés.
    - Diffuser aux Owners et gestionnaires.
    - Intégrer dans les chartes de gouvernance documentaire.
 
-#### E.14.1.B. Contrôles
+#### E.14.1.c. Contrôles
 - Vérifier que toutes les données archivées respectent la durée fixée.
 - Journaliser dans `RetentionPolicyLog` : Type de données, Durée, Date de mise en archive.
 
-### E.14.2. Vérifier conformité RGPD / Loi 25
+### E.14.2. Vérifier conformité RGPD
 
 #### E.14.2.a. Objectif
 S’assurer que l’archivage respecte les réglementations en vigueur (Europe et Québec).
@@ -1338,7 +1364,7 @@ S’assurer que l’archivage respecte les réglementations en vigueur (Europe e
 1. **Identifier les données personnelles** :
    - Liens contenant noms, adresses, identifiants.
    - Permissions associées à des utilisateurs.
-2. **Appliquer les principes RGPD / Loi 25** :
+2. **Appliquer les principes RGPD** :
    - Minimisation : conserver uniquement ce qui est nécessaire.
    - Limitation : durée de conservation définie.
    - Sécurité : accès restreint aux archives.
@@ -1346,7 +1372,7 @@ S’assurer que l’archivage respecte les réglementations en vigueur (Europe e
    - Vérification annuelle de conformité.
    - Documentation des exceptions.
 
-#### E.14.2.B. Contrôles
+#### E.14.2.c. Contrôles
 - Vérifier que les archives ne contiennent pas de données personnelles non nécessaires.
 - Journaliser dans `ComplianceLog` : Donnée, Règlement applicable, Statut.
 
@@ -1365,46 +1391,46 @@ Supprimer automatiquement les données arrivées à échéance, avec validation 
    - Notification envoyée au comité.
    - Purge exécutée uniquement après approbation.
 
-#### E.14.3.B. Contrôles
+#### E.14.3.c. Contrôles
 - Vérifier que toutes les purges sont tracées.
 - Mesurer volume de données supprimées chaque trimestre.
 - Journaliser dans `PurgeLog`.
 
-### 1.14.4. Intégration dans SAPS
+### E.14.4. Intégration dans SAPS
 
 - **Politique de conservation** : intégrée dans **Phase 5 – Gouvernance avancée**.
-- **Conformité RGPD / Loi 25** : intégrée dans **Phase 7 – Escalade et conformité**.
+- **Conformité RGPD** : intégrée dans **Phase 7 – Escalade et conformité**.
 - **Processus de purge** : appliqué dans **Phase 9 – Optimisation continue**.
 - **Logs associés** :
   - `RetentionPolicyLog` pour suivi des durées.
   - `ComplianceLog` pour suivi réglementaire.
   - `PurgeLog` pour suivi des suppressions.
 
-### 1.14.5. Checklists opérationnelles
+### E.14.5. Checklists opérationnelles
 
-#### 1.14.5.a. Avant lancement
+#### E.14.5.a. Avant lancement
 - Définir politique de conservation (3 ans max).
 - Identifier données personnelles sensibles.
 - Configurer processus de purge.
 
-#### 1.14.5.b. Pendant utilisation
-- Vérifier conformité RGPD / Loi 25.
+#### E.14.5.b. Pendant utilisation
+- Vérifier conformité RGPD.
 - Contrôler respect des durées de conservation.
 - Suivre purges dans `PurgeLog`.
 
-#### 1.14.5.B. Après 12 mois
+#### E.14.5.c. Après 12 mois
 - Auditer conformité des archives.
 - Ajuster politique de conservation si nécessaire.
 - Améliorer processus de purge selon feedback.
 
 ## E.15. Solution complète – Sous‑estimation du temps de maintenance
 
-### 1.15.1. Allouer 10–15 % du temps projet à la maintenance continue
+### E.15.1. Allouer 10–15 % du temps projet à la maintenance continue
 
-#### 1.15.1.a. Objectif
+#### E.15.1.a. Objectif
 Prévenir les dérives en réservant systématiquement une part du temps projet pour la maintenance.
 
-#### 1.15.1.b. Étapes
+#### E.15.1.b. Étapes
 1. **Définir une règle de gestion** :
    - Chaque projet SAPS doit inclure 10–15 % du temps total pour maintenance.
    - Exemple : projet de 200 h → 20 à 30 h réservées.
@@ -1415,16 +1441,16 @@ Prévenir les dérives en réservant systématiquement une part du temps projet 
    - Informer les gestionnaires et Owners.
    - Mentionner dans la charte de gouvernance.
 
-#### 1.15.1.B. Contrôles
+#### E.15.1.c. Contrôles
 - Vérifier que le temps de maintenance est bien réservé.
 - Journaliser dans `MaintenanceAllocationLog` : Projet, TempsTotal, TempsMaintenance, %.
 
-### 1.15.2. Planifier des points de contrôle mensuels
+### E.15.2. Planifier des points de contrôle mensuels
 
-#### 1.15.2.a. Objectif
+#### E.15.2.a. Objectif
 Assurer un suivi régulier et anticiper les ajustements nécessaires.
 
-#### 1.15.2.b. Étapes
+#### E.15.2.b. Étapes
 1. **Créer un calendrier de contrôle** :
    - Réunion mensuelle avec gestionnaires et Owners.
    - Durée : 30–45 min.
@@ -1435,16 +1461,16 @@ Assurer un suivi régulier et anticiper les ajustements nécessaires.
 3. **Tracer les décisions** :
    - Table `ControlMeetingLog` : Date, Participants, Décisions, Actions.
 
-#### 1.15.2.B. Contrôles
+#### E.15.2.c. Contrôles
 - Vérifier que les réunions sont tenues chaque mois.
 - Suivre le taux de réalisation des actions décidées.
 
-### 1.15.3. Documenter les ajustements dans un registre
+### E.15.3. Documenter les ajustements dans un registre
 
-#### 1.15.3.a. Objectif
+#### E.15.3.a. Objectif
 Assurer la traçabilité des modifications et faciliter les audits.
 
-#### 1.15.3.b. Étapes
+#### E.15.3.b. Étapes
 1. **Créer un registre d’ajustements** :
    - Table `AdjustmentLog` : Date, Composant, Ajustement, Motif, Responsable.
 2. **Mettre à jour après chaque contrôle** :
@@ -1454,11 +1480,11 @@ Assurer la traçabilité des modifications et faciliter les audits.
    - Vérifier cohérence entre incidents et ajustements.
    - Identifier tendances (ajustements récurrents).
 
-#### 1.15.3.B. Contrôles
+#### E.15.3.c. Contrôles
 - Vérifier que chaque ajustement est documenté.
 - Auditer trimestriellement le registre.
 
-### 1.15.4. Intégration dans SAPS
+### E.15.4. Intégration dans SAPS
 
 - **Allocation de temps** : intégrée dans **Phase 0 – Buffer initial** et planification projet.
 - **Points de contrôle mensuels** : intégrés dans **Phase 5 – Gouvernance avancée**.
@@ -1468,19 +1494,19 @@ Assurer la traçabilité des modifications et faciliter les audits.
   - `ControlMeetingLog` pour suivi des réunions.
   - `AdjustmentLog` pour suivi des ajustements.
 
-### 1.15.5. Checklists opérationnelles
+### E.15.5. Checklists opérationnelles
 
-#### 1.15.5.a. Avant lancement
+#### E.15.5.a. Avant lancement
 - Réserver 10–15 % du temps projet pour maintenance.
 - Planifier calendrier de réunions mensuelles.
 - Créer registre des ajustements.
 
-#### 1.15.5.b. Pendant utilisation
+#### E.15.5.b. Pendant utilisation
 - Tenir réunions mensuelles de contrôle.
 - Documenter ajustements dans `AdjustmentLog`.
 - Vérifier allocation du temps de maintenance.
 
-#### 1.15.5.c Après 6 mois
+#### E.15.5.c. Après 6 mois
 - Auditer registre des ajustements.
 - Évaluer pertinence du % de maintenance réservé.
 - Ajuster processus selon feedback.
@@ -1504,7 +1530,7 @@ Garantir que SAPS bénéficie d’un soutien visible et durable au niveau exécu
    - Diffuser aux gestionnaires et Owners.
    - Mentionner dans la charte de gouvernance.
 
-#### E.16.1.B. Contrôles
+#### E.16.1.c. Contrôles
 - Vérifier existence d’un document officiel de soutien.
 - Journaliser dans `SponsorLog` : Date, Direction impliquée, Type d’appui.
 
@@ -1515,7 +1541,7 @@ Positionner SAPS comme indispensable pour répondre aux obligations réglementai
 
 #### E.16.2.b. Étapes
 1. **Aligner SAPS avec les normes** :
-   - RGPD, Loi 25, politiques internes.
+   - RGPD et politiques internes.
    - Mettre en avant la traçabilité et les logs.
 2. **Mettre en avant les bénéfices** :
    - Réduction des doublons.
@@ -1525,13 +1551,13 @@ Positionner SAPS comme indispensable pour répondre aux obligations réglementai
    - Indicateurs : % SLA respectés, NbPermissions corrigées, NbRollbacks réussis.
    - Diffusion trimestrielle au comité exécutif.
 
-#### E.16.2.B. Contrôles
+#### E.16.2.c. Contrôles
 - Vérifier que les rapports de conformité sont produits et diffusés.
 - Journaliser dans `ComplianceLog` : Date, Indicateurs, Résultats.
 
 ### E.16.3. Inclure SAPS dans les objectifs stratégiques
 
-#### E.16.3.a. bjectif
+#### E.16.3.a. Objectif
 Faire de SAPS un projet reconnu dans les plans stratégiques de l’organisation.
 
 #### E.16.3.b. Étapes
@@ -1540,12 +1566,12 @@ Faire de SAPS un projet reconnu dans les plans stratégiques de l’organisation
    - KPI : % réduction des erreurs documentaires.
 2. **Associer SAPS aux initiatives de transformation numérique** :
    - Positionner SAPS comme levier de modernisation.
-   - Lier SAPS aux projets SharePoint/Teams/Power BE.
+   - Lier SAPS aux projets SharePoint/Teams/Power BI.
 3. **Suivi stratégique** :
    - Inclure SAPS dans les tableaux de bord exécutifs.
    - Présenter résultats lors des comités de direction.
 
-#### E.16.3.B. Contrôles
+#### E.16.3.c. Contrôles
 - Vérifier que SAPS apparaît dans les objectifs stratégiques.
 - Journaliser dans `StrategyLog` : Objectif, KPI, Date d’intégration.
 
@@ -1571,7 +1597,7 @@ Faire de SAPS un projet reconnu dans les plans stratégiques de l’organisation
 - Communiquer soutien exécutif aux gestionnaires.
 - Suivre intégration dans objectifs stratégiques.
 
-#### E.16.5.B. Après 12 mois
+#### E.16.5.c. Après 12 mois
 - Auditer impact de SAPS sur conformité et gouvernance.
 - Évaluer maintien du soutien exécutif.
 - Ajuster positionnement stratégique si nécessaire.
@@ -1594,7 +1620,7 @@ Assurer la continuité opérationnelle si la personne clé est absente ou indisp
    - Planning mensuel : le backup pilote une opération clé (extraction, publication, rollback).
    - Bilan court post‑opération (10 min).
 
-#### E.17.1.B. Contrôles
+#### E.17.1.c. Contrôles
 - **KPI formation** : % du parcours complété par backup.
 - **Journal** : `BackupTrainingLog` (Personne, Module, Date, Statut, Observations).
 
@@ -1610,10 +1636,10 @@ Rendre le système opérable par un backup sans dépendre d’informations tacit
    - Guides en Markdown (impératif, pas d’images lourdes), captures légères si critique.
    - Nommage versionné : `SAPS.Guide_<Composant>_vX.Y.Z.md`.
 3. **Assurer la traçabilité** :
-   - `ChangeLoC.md` par composant (Date, Auteur, Motif, Impact).
+   - `ChangeLog.md` par composant (Date, Auteur, Motif, Impact).
    - Revues documentaires mensuelles (pair review).
 
-#### E.17.2.B. Contrôles
+#### E.17.2.c. Contrôles
 - **KPI couverture** : % modules documentés vs liste de référence.
 - **Journal** : `DocCoverageLog` (Composant, Version, Auteur, Revue, Statut).
 
@@ -1635,7 +1661,7 @@ Rendre le système opérable par un backup sans dépendre d’informations tacit
    - Calendrier : qui répond aux incidents chaque semaine.
    - Point hebdo de 15 min (risques, décisions).
 
-#### E.17.3.B. Contrôles
+#### E.17.3.c. Contrôles
 - **KPI** : temps moyen de résolution post‑escalade.
 - **Journal** : `ResponsibilityMatrixLog` (Rôle, Nom, Période, Changements).
 
@@ -1654,7 +1680,7 @@ Diminuer le risque systémique lié aux accès et aux secrets détenus par une s
 3. **Tests de continuité** (trimestriels) :
    - Simulation “absence personne clé” : le backup publie, corrige, restaure.
 
-#### E.17.4.B. Contrôles
+#### E.17.4.c. Contrôles
 - **KPI bus factor** : nombre de personnes capables de restaurer en Prod.
 - **Journal** : `AccessRedundancyLog` (Secret/Accès, Titulaires, Test, Résultat).
 
@@ -1683,7 +1709,7 @@ Diminuer le risque systémique lié aux accès et aux secrets détenus par une s
 - **Point de gouvernance** hebdo (incidents, décisions).
 - **Tests de continuité** trimestriels réalisés.
 
-#### E.17.6.B. Après 6 mois
+#### E.17.6.c. Après 6 mois
 - **Audit bus factor** et redondances d’accès.
 - **Mise à jour Playbook** et RACI selon feedback.
 - **Ajustement du calendrier** de rotation et des approbations.
@@ -1695,8 +1721,8 @@ Diminuer le risque systémique lié aux accès et aux secrets détenus par une s
 Chaque ligne = un fichier ou un lien.  
 Colonnes recommandées :
 
-- **Fichier/Lien** : nom du document ou URF.  
-- **Site** : emplacement (SharePoint, Teams, etB.).  
+- **Fichier/Lien** : nom du document ou URL.  
+- **Site** : emplacement (SharePoint, Teams, etc.).  
 - **Owner** : responsable du contenu.  
 - **NbVisitesTotal** : nombre total de visites sur la période.  
 - **NbUtilisateursUniques** : nombre d’utilisateurs distincts.  
@@ -1708,17 +1734,7 @@ Colonnes recommandées :
 - **NbVisitesAnnée** : visites par année.  
 - **RatioVisites** : NbVisites fichier ÷ NbVisitesTotal du site (%).  
 
-### E.18.2. Exemple de tableau enrichi
-
-| Fichier/Lien   | Site   | Owner   | NbVisitesTotal | NbUtilisateursUniques | HeuresUtilisées | Heures/Utilisateur | NbVisitesJour | NbVisitesSemaine | NbVisitesMois | NbVisitesAnnée | RatioVisites |
-|----------------|--------|---------|----------------|-----------------------|-----------------|--------------------|---------------|------------------|---------------|----------------|--------------|
-| Doc1.pdf       | Site A | Alice   | 120            | 35                    | 8,3 h           | 0,24 h             | 5             | 25               | 110           | 1200           | 12%          |
-| Procédure.docx | Site B | Bob     | 85             | 20                    | 6,1 h           | 0,30 h             | 3             | 18               | 80            | 950            | 8%           |
-| LienCritique1  | Site A | Claire  | 200            | 50                    | 15,7 h          | 0,31 h             | 8             | 40               | 180           | 2100           | 20%          |
-
----
-
-### E.18.3. Intégration dans SAPS
+### E.18.2. Intégration dans SAPS
 
 - **Visites par période** : intégrées dans **Phase 2 – Validation et suivi**.  
 - **Ratio par rapport au total** : intégré dans **Phase 6 – Visualisation et communication** (Power BI).  
@@ -1727,21 +1743,19 @@ Colonnes recommandées :
   - `UsageLog` → Heures utilisées.  
   - `UserLog` → NbUtilisateursUniques.  
 
----
+### E.18.3. Checklists opérationnelles
 
-### E.18.4. Checklists opérationnelles
-
-#### E.18.4.a. Avant lancement
+#### E.18.3.a. Avant lancement
 - Configurer table `VisitLog` avec colonnes jour/semaine/mois/année.  
 - Définir calcul du ratio visites ÷ total site.  
 - Créer vue Power BI “Usage par période”.
 
-#### E.18.4.b. Pendant utilisation
+#### E.18.3.b. Pendant utilisation
 - Vérifier cohérence des agrégations (jour/semaine/mois/année).  
 - Contrôler ratio visites par site.  
 - Suivre consultations du tableau.
 
-#### E.18.4.B. Après 3 mois
+#### E.18.3.c. Après 3 mois
 - Évaluer pertinence des indicateurs.  
 - Ajuster granularité (jour vs semaine).  
 - Intégrer feedback des gestionnaires.
@@ -1753,19 +1767,19 @@ Permettre aux gestionnaires et au comité de gouvernance de suivre non seulement
 ## F.2. Étapes d’intégration
 1. **Définir la feature dans SAPS**
    - Nom : “Vision stratégique”
-   - Description : Tableau de bord consolidé dans SharePoint, connecté à Power BE.
+   - Description : Tableau de bord consolidé dans SharePoint, connecté à Power BI.
    - Portée : Adoption, conformité, gains, benchmarks externes.
 
 2. **Créer une page SharePoint dédiée**
    - Section 1 : Indicateurs internes (SLA, corrections, escalades).
    - Section 2 : Tendances temporelles (évolution mensuelle).
-   - Section 3 : Benchmarks externes (RGPD/Loi 25, adoption M365).
+   - Section 3 : Benchmarks externes (RGPD, adoption M365).
    - Section 4 : Rapports du comité de gouvernance.
 
 3. **Connecter Power BI**
    - Publier un rapport “Vision stratégique SAPS”.
    - Ajouter filtres (site, période, Owner).
-   - Intégrer directement dans la page SharePoint via webpart Power BE.
+   - Intégrer directement dans la page SharePoint via webpart Power BI.
 
 4. **Gouvernance et maintenance**
    - Responsable : Admin SAPS + Comité de gouvernance.
